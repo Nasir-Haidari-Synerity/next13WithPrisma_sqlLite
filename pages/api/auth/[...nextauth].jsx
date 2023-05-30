@@ -10,7 +10,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
-export const authOptions: NextAuthOptions = {
+export const authOptions= {
   // https://next-auth.js.org/configuration/providers/oauth
   providers: [
     CredentialsProvider({
@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
         username: { label: "Username", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const dbUser = await prisma.user.findUnique({
           where: {
             email: credentials.username
